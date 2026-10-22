@@ -1,0 +1,36 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "buildCommand": "echo 'No build step required for PHP.'",
+  "outputDirectory": ".",
+  "functions": {
+    "api/*.php": {
+      "runtime": "@vercel/php@0.11.6"
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.php" }
+  ],
+  "headers": [
+    {
+      "source": "/uploads/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Content-Security-Policy", "value": "default-src 'none'; img-src 'self'; style-src 'self'; object-src 'none'; frame-ancestors 'none'" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    }
+  ],
+  "env": {
+    "APP_ENV": "production"
+  }
+}

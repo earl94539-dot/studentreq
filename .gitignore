@@ -1,0 +1,20 @@
+# ----- Env / secrets -----
+.env
+.env.local
+.env.*.local
+
+# ----- Mail outbox (demo mails) -----
+/mail_outbox/
+
+# ----- User uploads -----
+/uploads/*
+!/uploads/.htaccess
+
+# ----- OS / editor -----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
